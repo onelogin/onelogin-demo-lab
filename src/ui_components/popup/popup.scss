@@ -1,0 +1,18 @@
+.popup {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  border-bottom: 1px solid white;
+  background-color: #0093ff;
+}
+
+.popup-text {
+  flex: 9;
+}
+
+.popup-close {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+}

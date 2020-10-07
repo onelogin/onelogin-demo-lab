@@ -1,0 +1,18 @@
+.App, #root {
+  height: 100%;
+  overflow: auto;
+}
+
+.App, .app-body {
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	flex: 1;
+}
+
+@media (min-width: 500px) {
+  .app-body {
+    flex-direction: row;
+    flex: 1;
+  }
+}

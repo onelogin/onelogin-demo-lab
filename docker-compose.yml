@@ -1,0 +1,33 @@
+version: "3"
+services:
+  frontend:
+    build: .
+    tty: true
+    stdin_open: true
+    container_name: frontend
+    networks:
+      - testbed
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./public:/etc/nginx/public
+    networks:
+      - testbed
+    depends_on:
+      - frontend
+
+networks:
+  testbed:
+    external: true

@@ -1,0 +1,28 @@
+.profile {
+  padding: 30px;
+}
+
+.profile-forms {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+@media (max-width: 500px) {
+  .profile-forms {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.ratings-link {
+  text-decoration: none;
+  background: #3395D3;
+  color: #FFFFFE;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 5px;
+  display: block;
+}
