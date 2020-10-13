@@ -43,7 +43,7 @@ Generally the steps are
    2. You'll notice there is a `nginx.conf` file here with the smartmfa example. Whenever you want to integrate with another back-end, make sure you change the `nginx.conf` to include the new service. For example:
 
       1. ```nginx
-         location /<container_name_from_docker-compose.yml_for_service>/
+         location /<endpoint_for_frontend_to_use_when_calling_backend>/
          {
            proxy_pass http://<container_name_from_docker-compose.yml_for_service:<port>/;
            proxy_set_header X-Real-IP $remote_addr;

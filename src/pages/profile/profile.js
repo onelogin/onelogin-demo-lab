@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import withAuthenticatedUser from '../../HOC/with_authenticated_user';
 import AppWrapper from '../../ui_components/app_wrapper/app_wrapper'
-import ProfileForm from '../../ui_components/profile_form/profile_form';
+import ProfileForm from '../../ui_components/forms/profile_form';
 import Popup from '../../ui_components/popup/popup'
 
 class Profile extends Component {
@@ -14,7 +14,7 @@ class Profile extends Component {
 
   updateUser = (event) => {
     event.preventDefault();
-    let authServiceUrl = process.env.REACT_APP_BACKEND_URL;
+    let authServiceUrl = process.env.BACKEND_URL;
     fetch(`${authServiceUrl}/user`, {
       method: 'PUT',
       credentials: 'include',

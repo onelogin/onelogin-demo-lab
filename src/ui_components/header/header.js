@@ -2,11 +2,11 @@ import React from 'react';
 import withAuthenticatedUser from '../../HOC/with_authenticated_user';
 
 let Header = (props) => {
-  let linkString = process.env.REACT_APP_LOGIN_URL + "/login";
+  let linkString = "/login";
   let userNameString = "Log In"
 
   if(props.currentUser){
-    linkString = process.env.REACT_APP_LOGIN_URL + "/profile";
+    linkString = "/profile";
     userNameString = props.currentUser.name_first + " " + props.currentUser.name_last;
   }
   return (

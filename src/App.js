@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
-import SplashPage from './pages/splash_page/splash_page';
+import LoginPage from './pages/login_page/login_page';
+import SignupPage from './pages/signup_page/signup_page';
 import Profile from './pages/profile/profile';
 import { connect } from "react-redux";
 
@@ -10,12 +11,13 @@ class App extends Component {
   render(){
     let rootRoute = this.props.isAuthenticated ?
       <Route exact path="/" component={Profile} /> :
-      <Route exact path="/" component={SplashPage} />
+      <Route exact path="/" component={LoginPage} />
 
     return (
       <BrowserRouter>
         {rootRoute}
-        <Route path="/login" component={SplashPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/signup" component={SignupPage} />
         <Route path="/profile" component={Profile} />
       </BrowserRouter>
     );

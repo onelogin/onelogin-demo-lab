@@ -11,7 +11,8 @@ module.exports = {
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'onelogin-demo-lab.min.js'
+    filename: 'onelogin-demo-lab.min.js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -49,6 +50,7 @@ module.exports = {
   devServer: {
     host: '0.0.0.0',
     port: 3000,
-    disableHostCheck: true
+    disableHostCheck: true,
+    historyApiFallback: true
   }
 }
