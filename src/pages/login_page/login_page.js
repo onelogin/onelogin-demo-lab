@@ -33,7 +33,7 @@ class LoginPage extends Component {
     ).then((res) => {
       console.log(res.code, res.data)
       if(res.data.otp_sent){
-        this.setState({...this.state, listeningForOTP: true});
+        this.setState({...this.state, activeStateToken: res.data.state_token});
       } else {
         this.props.setUser({ isAuthenticated: true })
       }
@@ -43,13 +43,13 @@ class LoginPage extends Component {
   acceptOTP = (event) => {
     event.preventDefault();
     let otp_token = event.target.children.otp.value;
-    let state_token = this.state.stateToken
+    let state_token = this.state.activeStateToken;
     let authServiceUrl = process.env.BACKEND_URL;
     axios.post(`${authServiceUrl}/auth/otp`,
       { otp_token, state_token },
       { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, }
     ).then(res => {
-      this.setState( {...this.state, listeningForOTP: false} );
+      this.setState( {...this.state, activeStateToken: ""} );
     }).catch( err => console.log("Invalid OTP", err) );
   }
 
@@ -63,7 +63,7 @@ class LoginPage extends Component {
     return (
       <AppWrapper>
         <div className="splash-page">
-          <OTPModal action={this.acceptOTP} isOpen={this.state.listeningForOTP}/>
+          <OTPModal action={this.acceptOTP} isOpen={this.state.activeStateToken}/>
           {this.state.confirmEmail ? <Popup text="Please check your email and confirm your address to continue" close={this.resetConfirmEmail}/> : null}
           {this.state.wrongPassword ? <Popup text="Wrong password given" close={this.resetUnauthorized}/> : null}
           {this.state.mismatchPassword ? <Popup text="Password and Password Confirmation do not match" close={this.resetMismatch}/> : null}
