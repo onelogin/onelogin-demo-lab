@@ -2,7 +2,7 @@
   text-align: center;
   padding: 20px;
   font-size: calc(10px + 3vmin);
-  color: black;
+  color: #1C1f2A;
 }
 
 .splash-page {
@@ -14,10 +14,10 @@
 }
 
 .form {
-  padding: 20px;
+  padding: 40px;
   flex-grow: 1;
-  display: inline;
+  display: inline;;
   text-align: center;
-  input[type="email"] { min-width: 200px; }
-  input[type="password"] { min-width: 200px; }
+  input[type="email"] {color: #1C1f2A; min-width: 300px; min-height: 25px; background-color: #b9dfeb; border-radius: 5px;}
+  input[type="password"] {color: #1C1f2A; min-width: 300px; min-height: 25px; background-color:  #b9dfeb; border-radius: 5px;}
 }

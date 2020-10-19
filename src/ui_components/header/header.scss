@@ -1,7 +1,7 @@
 .header {
-  background: $access-green;
-  color: $off-white;
-  padding: 10px;
+  background: #1C1F2a;
+  color: white;
+  padding: 20px;
   display: flex;
   flex-direction: row;
 }
@@ -33,4 +33,9 @@
   .sign-in {
     text-align: center;
   }
+}
+
+.user-link {
+  color: white;
+  
 }
