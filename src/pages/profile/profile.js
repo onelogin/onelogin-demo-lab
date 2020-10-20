@@ -117,8 +117,10 @@ class Profile extends Component {
                 <ProfileForm formTitle="Update Name" submitAction={this.updateUser} fields={nameFields}/>
                 <ProfileForm formTitle="Update Password" submitAction={this.updateUser} fields={passwordResetFields}/>
               </div>
-            <h3>Your Apps</h3>
-            <a className="ratings-link" href={process.env.REACT_APP_RATINGS_URL}>Ratings - All your feedback in one place</a>
+             <div> 
+              <h1 className="apps">Your Apps - Ratings</h1>
+              <a className="ratings-link" href={process.env.REACT_APP_RATINGS_URL}>all your feedback in one place</a>
+            </div>  
           </div>
         </AppWrapper>
       );

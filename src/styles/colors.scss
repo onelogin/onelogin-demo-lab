@@ -1,2 +1,14 @@
 $access-green: #1f9614;
 $off-white: #FFFFFE;
+$onelogin-blue: #00A9E0;
+$onelogin-black: #1C1F2A;
+$onelogin-gray: rgb(243, 243, 244);
+
+.onelogin-input {
+    color: #00020a; 
+    font-weight: bold;
+    min-width: 300px; 
+    min-height: 25px; 
+    background-color: rgb(243, 243, 244); 
+    border-radius: 5px;
+}

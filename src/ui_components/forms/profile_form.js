@@ -12,7 +12,7 @@ const ProfileForm = (props) => {
               return (
                 <span key={field.name}>
                   <label className="profile-label">{field.label}</label>
-                  <input required id={field.name} className="profile-input" name={field.name} type={field.type || "text"} defaultValue={field.defaultValue || ""} key={field.name}/>
+                  <input required id={field.name} className="profile-input onelogin-input" name={field.name} type={field.type || "text"} defaultValue={field.defaultValue || ""} key={field.name}/>
                 </span>
               )
             }
