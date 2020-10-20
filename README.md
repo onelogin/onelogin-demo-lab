@@ -19,7 +19,8 @@ Currently we don't host or build images so you'll need to do the build step.
 Generally the steps are
 
 * Clone repositories and build images for front-end and back-end project(s) `docker-compose build`
-* Create a network for all the projects to live on  `docker network create <network>`
+* Create a network for all the projects to live on  `docker network create testbed`
+  * This example assumes you call your network `testbed`. If you want to use another name, make sure to adjust the docker-compose.yml files accordingly.
 * Ensure back-end examples have nginx proxies defined
 * Start back-end `docker-compose up`
 * Start front-end `docker-compose up`
