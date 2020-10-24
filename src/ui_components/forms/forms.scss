@@ -27,9 +27,11 @@
   display: block;
 }
 
-.profile-input {
-  margin-top: 10px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  display: block;
+.onelogin-input {
+  color: $onelogin-black; 
+  font-weight: bold;
+  min-width: 300px; 
+  min-height: 25px; 
+  background-color: $onelogin-gray; 
+  border-radius: 5px;
 }
