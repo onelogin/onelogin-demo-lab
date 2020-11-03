@@ -18,7 +18,8 @@ class LoginPage extends Component {
       confirmEmail: false,
       wrongPassword: false,
       userExists: false,
-      mismatchPassword: false
+      mismatchPassword: false,
+      modalVisible: false
     }
   }
 
@@ -74,6 +75,10 @@ class LoginPage extends Component {
   resetConfirmEmail = () => this.setState({...this.state, confirmEmail: false})
   resetUnauthorized = () => this.setState({...this.state, wrongPassword: false})
 
+  closeOTPModal = () => {
+    this.setState( {...this.state, listeningForOTP: false} );
+  }
+
   render(){
     if(this.props.isAuthenticated){
       return <Redirect to="/profile" />
@@ -81,7 +86,7 @@ class LoginPage extends Component {
     return (
       <AppWrapper>
         <div className="splash-page">
-          <OTPModal action={this.acceptOTP} isOpen={this.state.listeningForOTP}/>
+          {this.state.listeningForOTP ? <OTPModal action={this.acceptOTP} close={this.closeOTPModal}/> : <div />}
           {this.state.confirmEmail ? <Popup text="Please check your email and confirm your address to continue" close={this.resetConfirmEmail}/> : null}
           {this.state.wrongPassword ? <Popup text="Wrong password given" close={this.resetUnauthorized}/> : null}
           {this.state.mismatchPassword ? <Popup text="Password and Password Confirmation do not match" close={this.resetMismatch}/> : null}
