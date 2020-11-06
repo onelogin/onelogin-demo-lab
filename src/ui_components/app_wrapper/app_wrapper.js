@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../../ui_components/header/header';
 import LeftRail from '../left_rail/left_rail';
+import Header from '../header/header';
 
 const AppWrapper = (props) => {
   return(
@@ -15,3 +15,5 @@ const AppWrapper = (props) => {
 }
 
 export default AppWrapper
+
+

@@ -1,19 +1,18 @@
-import React from 'react';
+// import { render } from 'node-sass';
+import React, { Component} from 'react';
+import SubmitButton from '../buttons/submit_button';
 
-import SubmitButton from '../submit_button/submit_button';
-
-const OTPModal = (props) => {
-  return props.isOpen ? (
-    <div className="modal-background">
-      <div className="modal-card">
-        <form className="otp-input-form" onSubmit={props.action}>
-          <input className="otp-input-form-field" placeholder="One Time Password" name="otp"/><br/>
-          <SubmitButton text="Confirm"/>
-        </form>
+const OTPModal = ({close, action}) => (
+      <div className="modal-background">
+        <div className="modal-card">
+        <button className="cancel-button" onClick={close}>X</button>
+          <form className="otp-input-form" onSubmit={action}>
+            <input className="otp-input-form-field onelogin-input" placeholder="One Time Password" name="otp"/><br/>
+            <SubmitButton text="Confirm"/>&nbsp;
+            <button className="submit-button" onClick={close}>Cancel</button>
+          </form>
+        </div>
       </div>
-    </div>
-
-  ) : null;
-}
+  )
 
 export default OTPModal;

@@ -39,13 +39,21 @@ class SignupPage extends Component {
         { user_identifier: email, phone, password },
         { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, }
       ).then(res => {
-        if(res.data.otp_sent){
+        if(res.data.otp_sent || process.env.DEBUG_MODAL == "true"){
           this.setState({...this.state, stateToken: res.data.state_token, listeningForOTP: true});
         } else {
-          this.props.setUser({ isAuthenticated: true })
+          this.props.setUser({ isAuthenticated: true });
         }
       }).catch(err => {
-        this.setState({...this.state, serverError: true});
+        if(process.env.DEBUG_MODAL == "true") {
+          this.setState({...this.state, stateToken: "token", listeningForOTP: true});
+          console.log("Skipping for DEBUG MODAL")
+        } else if(process.env.DEBUG_PROFILE == "true") {
+          this.props.setUser({ isAuthenticated: true });
+          console.log("Skipping to DEBUG PROFILE")
+        } else {
+          this.setState({...this.state, serverError: true});
+        }
       })
     }
   }
@@ -53,17 +61,22 @@ class SignupPage extends Component {
   acceptOTP = (event) => {
     event.preventDefault();
     let authServiceUrl = process.env.BACKEND_URL;
-
     let otp_token = event.target.children.otp.value;
     let state_token = this.state.stateToken;
-
     axios.post(`${authServiceUrl}/auth/otp`,
       { otp_token, state_token },
       { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, }
     ).then(res => {
       this.setState( {...this.state, listeningForOTP: false} );
       this.props.setUser({ isAuthenticated: true })
-    }).catch( err => console.log("Invalid OTP", err) );
+    }).catch( err => {
+      if(process.env.DEBUG_PROFILE == "true") {
+        this.props.setUser({ isAuthenticated: true })
+        console.log("Skipping for debug")
+      } else {
+        console.log("Invalid OTP", err)
+      }
+    } );
   }
 
   resetServerError = () => this.setState({...this.state, serverError: false})

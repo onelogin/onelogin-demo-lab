@@ -6,13 +6,13 @@ class LeftRail extends Component {
       <div className="left-rail">
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" className="link">Home</Link>
           </li>
           <li>
-            <Link to="/stats">My Statistics</Link>
+            <Link to="/stats" className="link">My Statistics</Link>
           </li>
           <li>
-            <Link to="/rating">Rating - To Remove</Link>
+            <Link to="/rating" className="link">Rating - To Remove</Link>
           </li>
         </ul>
       </div>

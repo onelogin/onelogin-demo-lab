@@ -1,7 +1,7 @@
 .header {
-  background: $access-green;
-  color: $off-white;
-  padding: 10px;
+  background: $onelogin-black;
+  color: white;
+  padding: 20px;
   display: flex;
   flex-direction: row;
 }
@@ -16,10 +16,11 @@
   padding: 0px 20px;
 }
 
-.sign-in {
+.header-right-link {
   flex: 1;
   text-align: right;
   padding: 20px;
+  max-width: 60px;
 }
 
 @media (max-width: 500px) {
@@ -33,4 +34,9 @@
   .sign-in {
     text-align: center;
   }
+}
+
+.user-link {
+  color: white;
+
 }

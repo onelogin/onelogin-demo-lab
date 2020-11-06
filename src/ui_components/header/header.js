@@ -15,8 +15,11 @@ let Header = (props) => {
         <h1 className="main-title">Access</h1>
         <h4 className="subtitle">Manage your account</h4>
       </div>
-      <div className="sign-in">
+      <div className="header-right-link">
         <a className="user-link" href={linkString}>{userNameString}</a>
+      </div>
+      <div className="header-right-link">
+        <a className="user-link" href="/signup">Sign Up</a>
       </div>
     </header>
   );

@@ -18,7 +18,8 @@ class LoginPage extends Component {
       confirmEmail: false,
       wrongPassword: false,
       userExists: false,
-      mismatchPassword: false
+      mismatchPassword: false,
+      modalVisible: false
     }
   }
 
@@ -37,24 +38,46 @@ class LoginPage extends Component {
       } else {
         this.props.setUser({ isAuthenticated: true })
       }
+    }).catch(err => {
+      if(process.env.DEBUG_MODAL == "true") {
+        this.setState({...this.state, stateToken: "token", listeningForOTP: true});
+        console.log("Skipping for DEBUG MODAL")
+      } else if(process.env.DEBUG_PROFILE == "true") {
+        this.props.setUser({ isAuthenticated: true });
+        console.log("Skipping to DEBUG PROFILE")
+      } else {
+        this.setState({...this.state, serverError: true});
+      }
     })
   }
 
   acceptOTP = (event) => {
     event.preventDefault();
-    let otp_token = event.target.children.otp.value;
-    let state_token = this.state.activeStateToken;
     let authServiceUrl = process.env.BACKEND_URL;
+    let otp_token = event.target.children.otp.value;
+    let state_token = this.state.stateToken;
     axios.post(`${authServiceUrl}/auth/otp`,
       { otp_token, state_token },
       { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, }
     ).then(res => {
-      this.setState( {...this.state, activeStateToken: ""} );
-    }).catch( err => console.log("Invalid OTP", err) );
+      this.setState( {...this.state, listeningForOTP: false} );
+      this.props.setUser({ isAuthenticated: true })
+    }).catch( err => {
+      if(process.env.DEBUG_PROFILE == "true") {
+        this.props.setUser({ isAuthenticated: true })
+        console.log("Skipping for debug")
+      } else {
+        console.log("Invalid OTP", err)
+      }
+    } );
   }
 
   resetConfirmEmail = () => this.setState({...this.state, confirmEmail: false})
   resetUnauthorized = () => this.setState({...this.state, wrongPassword: false})
+
+  closeOTPModal = () => {
+    this.setState( {...this.state, listeningForOTP: false} );
+  }
 
   render(){
     if(this.props.isAuthenticated){
@@ -63,7 +86,7 @@ class LoginPage extends Component {
     return (
       <AppWrapper>
         <div className="splash-page">
-          <OTPModal action={this.acceptOTP} isOpen={this.state.activeStateToken}/>
+          {this.state.listeningForOTP ? <OTPModal action={this.acceptOTP} close={this.closeOTPModal}/> : <div />}
           {this.state.confirmEmail ? <Popup text="Please check your email and confirm your address to continue" close={this.resetConfirmEmail}/> : null}
           {this.state.wrongPassword ? <Popup text="Wrong password given" close={this.resetUnauthorized}/> : null}
           {this.state.mismatchPassword ? <Popup text="Password and Password Confirmation do not match" close={this.resetMismatch}/> : null}

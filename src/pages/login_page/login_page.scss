@@ -2,7 +2,7 @@
   text-align: center;
   padding: 20px;
   font-size: calc(10px + 3vmin);
-  color: black;
+  color: $onelogin-black;
 }
 
 .splash-page {
@@ -14,10 +14,9 @@
 }
 
 .form {
-  padding: 20px;
+  padding: 40px;
   flex-grow: 1;
   display: inline;
   text-align: center;
-  input[type="email"] { min-width: 200px; }
-  input[type="password"] { min-width: 200px; }
 }
+
