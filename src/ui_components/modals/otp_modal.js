@@ -1,6 +1,5 @@
 // import { render } from 'node-sass';
 import React, { Component} from 'react';
-import CancelButton from '../cancel_button/cancel_button';
 import SubmitButton from '../submit_button/submit_button';
 
 const OTPModal = ({close, action}) => (
