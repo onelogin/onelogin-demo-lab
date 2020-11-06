@@ -1,6 +1,6 @@
 // import { render } from 'node-sass';
 import React, { Component} from 'react';
-import SubmitButton from '../submit_button/submit_button';
+import SubmitButton from '../buttons/submit_button';
 
 const OTPModal = ({close, action}) => (
       <div className="modal-background">
