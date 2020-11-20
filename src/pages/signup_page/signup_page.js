@@ -83,6 +83,7 @@ class SignupPage extends Component {
   resetConfirmEmail = () => this.setState({...this.state, confirmEmail: false})
   resetMismatch = () => this.setState({...this.state, mismatchPassword: false})
   resetUserExists = () => this.setState({...this.state, userExists: false})
+  closeOTPModal = () => this.setState({...this.state, listeningForOTP: false})
 
   render(){
     if(this.props.isAuthenticated){
@@ -91,7 +92,7 @@ class SignupPage extends Component {
     return (
       <AppWrapper>
         <div className="splash-page">
-          <OTPModal action={this.acceptOTP} isOpen={this.state.listeningForOTP}/>
+          {this.state.listeningForOTP ? <OTPModal action={this.acceptOTP} close={this.closeOTPModal}/> : null}
           {this.state.serverError ? <Popup text="The User Exists Already" close={this.resetServerError}/> : null}
           {this.state.mismatchPassword ? <Popup text="Password and Password Confirmation do not match" close={this.resetMismatch}/> : null}
           {this.state.userExists ? <Popup text="User with that email already exists" close={this.resetUserExists}/> : null}
