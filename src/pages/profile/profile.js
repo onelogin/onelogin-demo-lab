@@ -107,7 +107,7 @@ class Profile extends Component {
         }
       ]
       return (
-        <AppWrapper>
+        <AppWrapper activePage="profile">
           {this.state.updatedProfile ? <Popup text="Profile updated successfully" close={this.resetUpdate}/> : null}
           {this.state.wrongPassword ? <Popup text="Wrong password given" close={this.resetUnauthorized}/> : null}
           {this.state.mismatchPassword ? <Popup text="Password and Password Confirmation do not match" close={this.resetMismatch}/> : null}
@@ -117,10 +117,10 @@ class Profile extends Component {
                 <ProfileForm formTitle="Update Name" submitAction={this.updateUser} fields={nameFields}/>
                 <ProfileForm formTitle="Update Password" submitAction={this.updateUser} fields={passwordResetFields}/>
               </div>
-             <div> 
+             <div>
               <h1 className="apps">Your Apps - Ratings</h1>
               <a className="ratings-link" href={process.env.REACT_APP_RATINGS_URL}>all your feedback in one place</a>
-            </div>  
+            </div>
           </div>
         </AppWrapper>
       );

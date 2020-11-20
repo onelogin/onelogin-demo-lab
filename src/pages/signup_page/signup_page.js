@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import withAuthenticatedUser from '../../HOC/with_authenticated_user';
 
 import AppWrapper from '../../ui_components/app_wrapper/app_wrapper'
-import SMSSignupForm from '../../ui_components/forms/sms_signup_form';
+import SignupForm from '../../ui_components/forms/signup_form';
 import Popup from '../../ui_components/popup/popup';
 import OTPModal from '../../ui_components/modals/otp_modal';
 
@@ -86,18 +86,15 @@ class SignupPage extends Component {
   closeOTPModal = () => this.setState({...this.state, listeningForOTP: false})
 
   render(){
-    if(this.props.isAuthenticated){
-      return <Redirect to="/profile" />
-    }
+    if(this.props.isAuthenticated) return <Redirect to="/profile" />
     return (
-      <AppWrapper>
+      <AppWrapper activePage="signup">
         <div className="splash-page">
-          {this.state.listeningForOTP ? <OTPModal action={this.acceptOTP} close={this.closeOTPModal}/> : null}
           {this.state.serverError ? <Popup text="The User Exists Already" close={this.resetServerError}/> : null}
           {this.state.mismatchPassword ? <Popup text="Password and Password Confirmation do not match" close={this.resetMismatch}/> : null}
           {this.state.userExists ? <Popup text="User with that email already exists" close={this.resetUserExists}/> : null}
           <div className="form">
-            <SMSSignupForm className="form" handleSignup={this.handleSignup}/>
+            <SignupForm className="form" handleSignup={this.handleSignup}/>
           </div>
         </div>
       </AppWrapper>

@@ -7,9 +7,10 @@ const SignupForm = (props) => {
     <div>
       <h4 className="splash-header">Sign Up</h4>
       <form className="input-form" onSubmit={props.handleSignup}>
-        <input className="input-form-field" placeholder="Email" type="email" name="emailAddress"/><br/>
-        <input className="input-form-field" placeholder="Password" type="password" name="password"/><br/>
-        <input className="input-form-field" placeholder="Confirm Password" type="password" name="passwordConfirm"/><br/><br/>
+        <h4>Credentials</h4>
+        <input className="input-form-field onelogin-input" placeholder="Email" type="email" name="emailAddress" required/><br/>
+        <input className="input-form-field onelogin-input" placeholder="Password" type="password" name="password"/><br/>
+        <input className="input-form-field onelogin-input" placeholder="Confirm Password" type="password" name="passwordConfirm"/><br/><br/>
         <SubmitButton text="Sign Up"/>
       </form>
     </div>
