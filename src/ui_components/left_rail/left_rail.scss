@@ -5,12 +5,12 @@
   .section-heading {
     color: white;
     margin: 30px 30px 20px 30px;
-    text-decoration: underline;
     font-weight: bold;
     font-size: 25px;
   }
   ul li {
     cursor: pointer;
+    text-align: center;
     &:hover {
       background-color: $onelogin-black;
       transition: background-color 0.4s linear;
