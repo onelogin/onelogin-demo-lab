@@ -18,7 +18,8 @@ class SignupSmartMFAPage extends Component {
       confirmEmail: false,
       wrongPassword: false,
       userExists: false,
-      mismatchPassword: false
+      mismatchPassword: false,
+      backendError: ""
     }
   }
 
@@ -52,7 +53,10 @@ class SignupSmartMFAPage extends Component {
           this.props.setUser({ isAuthenticated: true });
           console.log("Skipping to DEBUG PROFILE")
         } else {
-          this.setState({...this.state, serverError: true});
+          this.setState({
+            ...this.state,
+            backendError: err.response.data.error || err.response.data.message
+          });
         }
       })
     }
@@ -79,7 +83,7 @@ class SignupSmartMFAPage extends Component {
     } );
   }
 
-  resetServerError = () => this.setState({...this.state, serverError: false})
+  resetServerError = () => this.setState({...this.state, backendError: ""})
   resetConfirmEmail = () => this.setState({...this.state, confirmEmail: false})
   resetMismatch = () => this.setState({...this.state, mismatchPassword: false})
   resetUserExists = () => this.setState({...this.state, userExists: false})
@@ -93,7 +97,7 @@ class SignupSmartMFAPage extends Component {
       <AppWrapper activePage="signup_smart_mfa">
         <div className="splash-page">
           {this.state.listeningForOTP ? <OTPModal action={this.acceptOTP} close={this.closeOTPModal}/> : null}
-          {this.state.serverError ? <Popup text="The User Exists Already" close={this.resetServerError}/> : null}
+          {this.state.backendError != "" ? <Popup text={this.state.backendError} close={this.resetServerError}/> : null}
           {this.state.mismatchPassword ? <Popup text="Password and Password Confirmation do not match" close={this.resetMismatch}/> : null}
           {this.state.userExists ? <Popup text="User with that email already exists" close={this.resetUserExists}/> : null}
           <div className="form">
