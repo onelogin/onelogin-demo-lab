@@ -8,7 +8,7 @@
   margin-top: 20px;
   border-radius: 5px;
   padding-bottom: 70px;
- 
+
 }
 
 @media (max-width: 500px) {
@@ -17,23 +17,5 @@
     text-align: center;
     align-items: center;
     justify-content: center;
-}
-}
-
-.apps{
-  text-align: center;
-  color: white;
-  background-color: $onelogin-blue;
-  padding-bottom: 30px;
-  padding-top: 30px;
-}
-.ratings-link {
-  text-decoration: none;
-  color:black;
-  font-weight: bold;
-  text-align: center;
-  padding: 20px;
-  margin: 20px;
-  border-radius: 5px;
-  display: block;
+  }
 }

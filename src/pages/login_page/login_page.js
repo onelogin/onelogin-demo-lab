@@ -19,6 +19,7 @@ class LoginPage extends Component {
       wrongPassword: false,
       userExists: false,
       mismatchPassword: false,
+      isAuthenticated: false,
       modalVisible: false
     }
   }
@@ -28,27 +29,24 @@ class LoginPage extends Component {
     let authServiceUrl = process.env.BACKEND_URL;
     let user_identifier = event.target.children.emailAddress.value;
     let password = event.target.children.password.value;
-    axios.post(`${authServiceUrl}/auth/login`,
-      { user_identifier, password },
-      { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, }
-    ).then((res) => {
-      console.log(res.code, res.data)
-      if(res.data.otp_sent){
-        this.setState({...this.state, activeStateToken: res.data.state_token});
-      } else {
-        this.props.setUser({ isAuthenticated: true })
-      }
-    }).catch(err => {
-      if(process.env.DEBUG_MODAL == "true") {
-        this.setState({...this.state, stateToken: "token", listeningForOTP: true});
-        console.log("Skipping for DEBUG MODAL")
-      } else if(process.env.DEBUG_PROFILE == "true") {
-        this.props.setUser({ isAuthenticated: true });
-        console.log("Skipping to DEBUG PROFILE")
-      } else {
+
+    console.log("disconnected mode: ", process.env.DISCONNECTED_BACKEND == "true")
+    if(process.env.DISCONNECTED_BACKEND == "true"){
+      this.props.setUser({ isAuthenticated: true })
+    } else {
+      axios.post(`${authServiceUrl}/auth/login`,
+        { user_identifier, password },
+        { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, }
+      ).then((res) => {
+        if(res.data.otp_sent){
+          this.setState({...this.state, activeStateToken: res.data.state_token});
+        } else {
+          this.props.setUser({ isAuthenticated: true })
+        }
+      }).catch(err => {
         this.setState({...this.state, serverError: true});
-      }
-    })
+      })
+    }
   }
 
   acceptOTP = (event) => {
@@ -56,20 +54,19 @@ class LoginPage extends Component {
     let authServiceUrl = process.env.BACKEND_URL;
     let otp_token = event.target.children.otp.value;
     let state_token = this.state.stateToken;
-    axios.post(`${authServiceUrl}/auth/otp`,
-      { otp_token, state_token },
-      { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, }
-    ).then(res => {
-      this.setState( {...this.state, listeningForOTP: false} );
+    if(process.env.DISCONNECTED_BACKEND == "true"){
       this.props.setUser({ isAuthenticated: true })
-    }).catch( err => {
-      if(process.env.DEBUG_PROFILE == "true") {
+    } else {
+      axios.post(`${authServiceUrl}/auth/otp`,
+        { otp_token, state_token },
+        { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, }
+      ).then(res => {
+        this.setState( {...this.state, listeningForOTP: false} );
         this.props.setUser({ isAuthenticated: true })
-        console.log("Skipping for debug")
-      } else {
+      }).catch( err => {
         console.log("Invalid OTP", err)
-      }
-    } );
+      } );
+    }
   }
 
   resetConfirmEmail = () => this.setState({...this.state, confirmEmail: false})
@@ -88,9 +85,8 @@ class LoginPage extends Component {
           {this.state.wrongPassword ? <Popup text="Wrong password given" close={this.resetUnauthorized}/> : null}
           {this.state.mismatchPassword ? <Popup text="Password and Password Confirmation do not match" close={this.resetMismatch}/> : null}
           {this.state.userExists ? <Popup text="User with that email already exists" close={this.resetUserExists}/> : null}
-          <div className="form">
-            <h4 className="splash-header">Log In</h4>
-            <LoginForm handleLogin={this.handleLogin}/>
+          <div className="centered-form">
+            <LoginForm formTitle="Log In" handleLogin={this.handleLogin}/>
           </div>
         </div>
       </AppWrapper>

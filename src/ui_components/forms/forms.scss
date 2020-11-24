@@ -1,37 +1,23 @@
-.input-form {
-  color: #000;
+.left-aligned-input-form {
+  color: #000; // section title text
   text-align: left;
-  .input-form-field {
-    width: 200px;
-  }
-
-  .phone-format-text {
-    font-size: 12px;
-    margin-left: 20px;
-  }
-}
-
-.profile-form-section {
-  margin-bottom: 30px;
-  flex: 1
-}
-
-.profile-form-title {
-  margin-bottom: 10px;
-}
-
-.profile-label {
-  margin-top: 10px;
   margin-right: 20px;
-  margin-bottom: 10px;
+}
+
+.input-form-field {
   display: block;
+  margin: 10px 0px;
+}
+
+.centered-input-form {
+  text-align: center;
 }
 
 .onelogin-input {
-  color: $onelogin-black; 
+  color: $onelogin-black;
   font-weight: bold;
-  min-width: 300px; 
-  min-height: 25px; 
-  background-color: $onelogin-gray; 
+  min-width: 300px;
+  min-height: 25px;
+  background-color: $onelogin-gray;
   border-radius: 5px;
 }

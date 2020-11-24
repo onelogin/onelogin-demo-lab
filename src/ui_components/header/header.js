@@ -16,10 +16,10 @@ let Header = (props) => {
         <h4 className="subtitle">Manage your account</h4>
       </div>
       <div className="header-right-link">
-        <a className="user-link" href={linkString}>{userNameString}</a>
+        <a className="user-link" href="/signup">Sign Up</a>
       </div>
       <div className="header-right-link">
-        <a className="user-link" href="/signup">Sign Up</a>
+        <a className="user-link" href="/login">Sign Out</a>
       </div>
     </header>
   );

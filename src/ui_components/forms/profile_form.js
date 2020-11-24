@@ -4,24 +4,19 @@ import SubmitButton from '../buttons/submit_button';
 const ProfileForm = (props) => {
   return (
     <div className="profile-form-section">
-      <h3 className="profile-form-title">{props.formTitle}</h3>
-      <form onSubmit={props.submitAction}>
+      <form className="left-aligned-input-form" onSubmit={props.submitAction}>
+      <h4>{props.formTitle}</h4>
         {
-          props.fields.map( (field) => {
+          props.fields.map( field => {
             if ( field.label ) {
-              return (
-                <span key={field.name}>
-                  <label className="profile-label">{field.label}</label>
-                  <input required id={field.name} className="profile-input onelogin-input" name={field.name} type={field.type || "text"} defaultValue={field.defaultValue || ""} key={field.name}/>
-                </span>
-              )
+              return <input required id={field.name} placeholder={field.label} className="onelogin-input input-form-field" name={field.name} type={field.type || "text"} defaultValue={field.defaultValue || ""} key={field.name}/>
             }
             else {
-              return <input required className="profile-input" name={field.name} type={field.type || "text"} defaultValue={field.defaultValue || ""} key={field.name}/>
+              return <input required className="onelogin-input input-form-field" name={field.name} type={field.type || "text"} defaultValue={field.defaultValue || ""} key={field.name}/>
             }
           } )
         }
-        <SubmitButton text="Update Profile"/>
+        <SubmitButton text="Submit"/>
       </form>
     </div>
   )

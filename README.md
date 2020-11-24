@@ -46,7 +46,7 @@ Generally the steps are
       1. ```nginx
          location /<endpoint_for_frontend_to_use_when_calling_backend>/
          {
-           proxy_pass http://<container_name_from_docker-compose.yml_for_service:<port>/;
+           proxy_pass http://<container_name_from_docker-compose.yml_for_the_service:<port>/;
            proxy_set_header X-Real-IP $remote_addr;
            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
          }
@@ -57,6 +57,10 @@ Generally the steps are
 If you wish to skip the bit about building a network, you may also elect to clone the repositories under a common directory and add a single `docker-compose.yml` file. Doing so will get around the need to create a network.
 
 The easiest way to do this is to copy the service nodes from each service's `docker-compose.yml` file into your new major `docker-compose.yml` file. Ensure your `volumes` and `build` paths get updated with the actual locations of your projects.
+
+### Disconnected Backend Mode
+
+You may need to debug or demonstrate the user flow without connecting to a backend. When developing components, you might consider wrapping your outbound API calls in a check for the environment variable `DISCONNECTED_BACKEND` and provide a default behavior for when the app is expected to be disconnected from the particular API service. When one is developing this app in isolation, it would be a good idea to use `DISCONNECTED_BACKEND=true` unless the intent is to work on end to end debugging.
 
 ## Distribution Notes
 
