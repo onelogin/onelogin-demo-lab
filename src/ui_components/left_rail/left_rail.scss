@@ -1,16 +1,34 @@
 .left-rail {
   order: -1;
   background: $onelogin-blue;
-  padding: 40px;
+  overflow: scroll;
+  .section-heading {
+    color: white;
+    margin: 30px 30px 20px 30px;
+    font-weight: bold;
+    font-size: 25px;
+  }
+  ul li {
+    cursor: pointer;
+    text-align: center;
+    &:hover {
+      background-color: $onelogin-black;
+      transition: background-color 0.4s linear;
+    }
+  }
+  .link {
+    display: block;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 30px;
+    line-height: 40px;
+    transition: background-color 0.4s linear;
+  }
+   .active-left-rail-item {
+     @extend .link;
+     background-color: $onelogin-black;
+     transition: background-color 0.4s linear;
+   }
 }
- ul li {
-   margin-bottom: 8px;  
- }
-
- .link {
-   color: white;
-   font-weight: bold;
-   text-decoration: underline;
-
- }
-

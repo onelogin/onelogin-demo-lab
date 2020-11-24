@@ -14,10 +14,8 @@ function withAuthenticatedUser(WrappedComponent) {
 
     getCurrentUser = () => {
       let authServiceUrl = process.env.BACKEND_URL;
-      fetch(`/${authServiceUrl}/health`, {
-        credentials: 'include'
-      })
-      .then((res) => res.json())
+      fetch(`/${authServiceUrl}/health`, { credentials: 'include' } )
+      .then( res => res.json() )
       .then((res) => {
         // if(res.user){
         //   this.props.setUser({
