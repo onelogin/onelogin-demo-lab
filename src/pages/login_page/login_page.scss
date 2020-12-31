@@ -1,3 +1,27 @@
 .centered-form {
   margin: auto;
 }
+
+.oidc-splash-header {
+  color: black;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+.oidc-splash-page {
+  @extend .splash-page;
+  .oidc-link {
+    @extend .submit-button;
+    display: inline-block;
+    margin: auto;
+  }
+}
+
+.user-info-container {
+  width: 100%;
+  text-align: center;
+  .submit-button {
+    margin: auto;
+  }
+}
