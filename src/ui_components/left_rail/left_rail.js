@@ -13,6 +13,9 @@ const LeftRail = ({activePage}) => {
           <Link to="/login_oidc" className={activePage == "login_oidc" ? "active-left-rail-item" : "link"}>Log In (OIDC + PKCE)</Link>
         </li>
         <li>
+          <Link to="/login_oidc_with_client" className={activePage == "login_oidc_with_client" ? "active-left-rail-item" : "link"}>Log In (OIDC + PKCE) Off-Shelf Client</Link>
+        </li>
+        <li>
           <Link to="/signup" className={activePage == "signup" ? "active-left-rail-item" : "link"}>Sign Up (Basic)</Link>
         </li>
         <li>

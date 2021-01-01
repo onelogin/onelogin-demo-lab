@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import qs from "qs";
 import * as base64 from 'base64-js'
-import uuid from "uuid";
 
 import SubmitButton from '../../ui_components/buttons/submit_button';
 import AppWrapper from '../../ui_components/app_wrapper/app_wrapper'
-import LoginForm from '../../ui_components/forms/login_form';
 import Popup from '../../ui_components/popup/popup';
 
-class LoginPage extends Component {
+class LoginOIDCPage extends Component {
 
   constructor(props){
     super(props);
@@ -167,4 +165,4 @@ const urlSafe = (buffer) => {
   return encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
 }
 
-export default LoginPage;
+export default LoginOIDCPage;
