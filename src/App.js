@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
 import LoginPage from './pages/login_page/login_page';
-import LoginOIDCPage from './pages/login_page/login_oidc_page';
-import LoginOIDCPageWithClient from './pages/login_page/login_oidc_with_client';
+import LoginPKCEPage from './pages/login_page/login_pkce_page';
+import LoginPKCEPageWithClient from './pages/login_page/login_pkce_with_client';
 import SignupSmartMFAPage from './pages/signup_page/signup_smart_mfa_page';
 import SignupPage from './pages/signup_page/signup_page';
 import Profile from './pages/profile/profile';
@@ -20,8 +20,8 @@ class App extends Component {
       <BrowserRouter>
         {rootRoute}
         <Route path="/login" component={LoginPage} />
-        <Route path="/login_oidc" component={LoginOIDCPage} />
-        <Route path="/login_oidc_with_client" component={LoginOIDCPageWithClient} />
+        <Route path="/login_pkce" component={LoginPKCEPage} />
+        <Route path="/login_pkce_with_client" component={LoginPKCEPageWithClient} />
         <Route path="/signup" component={SignupPage} />
         <Route path="/signup_smart_mfa" component={SignupSmartMFAPage} />
         <Route path="/profile" component={Profile} />

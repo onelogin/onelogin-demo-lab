@@ -7,7 +7,7 @@ import SubmitButton from '../../ui_components/buttons/submit_button';
 import AppWrapper from '../../ui_components/app_wrapper/app_wrapper'
 import Popup from '../../ui_components/popup/popup';
 
-class LoginOIDCPage extends Component {
+class LoginPKCEPage extends Component {
 
   constructor( props ){
     super( props );
@@ -63,9 +63,9 @@ class LoginOIDCPage extends Component {
 
   render = () => {
     return (
-      <AppWrapper activePage="login_oidc">
+      <AppWrapper activePage="login_pkce">
         <div className="oidc-splash-page">
-          <h4 className="oidc-splash-header">OIDC PKCE</h4>
+          <h4 className="oidc-splash-header">PKCE Flow</h4>
           {
             this.state.errorMessage ?
               <Popup text={this.state.errorMessage} close={this.resetErrorMessage}/>
@@ -90,14 +90,14 @@ class LoginOIDCPage extends Component {
 // Encapsulation of the 3 main objectives. PKCE first step & second step, and getting some user info
 
 const PKCEAuthCodeFirstStep = () => {
-  let oidcURL = `${process.env.OIDC_IDP_URL}/auth`;
+  let oidcURL = `${process.env.IDP_URL}/auth`;
   let queryParams = [`client_id=${process.env.OIDC_CLIENT_ID}`];
   let codeVerifier = createCodeVerifier( 50 );
   localStorage.setItem( 'code_verifier', codeVerifier );
 
   return createCodeChallenge( codeVerifier ).then( codeChallenge => {
     queryParams.push(`code_challenge=${codeChallenge}`);
-    queryParams.push(`redirect_uri=http://localhost/login_oidc`);
+    queryParams.push(`redirect_uri=http://localhost/login_pkce`);
     queryParams.push(`code_challenge_method=S256`);
     queryParams.push(`response_type=code`);
     queryParams.push(`scope=openid`);
@@ -107,11 +107,11 @@ const PKCEAuthCodeFirstStep = () => {
 }
 
 const PKCEAuthCodeSecondStep = ( code ) => {
-  let oidcURL = `${process.env.OIDC_IDP_URL}/token`;
+  let oidcURL = `${process.env.IDP_URL}/token`;
 
   let params = qs.stringify( {
     grant_type: "authorization_code",
-    redirect_uri: "http://localhost/login_oidc",
+    redirect_uri: "http://localhost/login_pkce",
     client_id: process.env.OIDC_CLIENT_ID,
     code_verifier: localStorage.getItem( 'code_verifier' ),
     code
@@ -127,7 +127,7 @@ const PKCEAuthCodeSecondStep = ( code ) => {
 }
 
 const getUserInfo = () => {
-  let userInfoURL = `${process.env.OIDC_IDP_URL}/me`;
+  let userInfoURL = `${process.env.IDP_URL}/me`;
   let token = localStorage.getItem( 'access_token' );
   return axios.get( userInfoURL,
     { headers: {
@@ -183,4 +183,4 @@ const urlSafe = ( buffer ) => {
   return encoded.replace( /\+/g, '-' ).replace( /\//g, '_' ).replace( /=/g, '' );
 }
 
-export default LoginOIDCPage;
+export default LoginPKCEPage;
