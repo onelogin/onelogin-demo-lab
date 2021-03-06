@@ -48,6 +48,12 @@ module.exports = {
     } )
   ],
   devServer: {
+    proxy: {
+      '/onelogin': {
+        target: "https://pied-piper-dev.onelogin.com",
+        secure: false
+      }
+    },
     host: '0.0.0.0',
     port: 3000,
     disableHostCheck: true,
