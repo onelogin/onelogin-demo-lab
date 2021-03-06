@@ -10,6 +10,9 @@ const LeftRail = ({activePage}) => {
           <Link to="/" className={activePage == "login" ? "active-left-rail-item" : "link"}>Log In (Basic)</Link>
         </li>
         <li>
+          <Link to="/login_oidc" className={activePage == "login_oidc" ? "active-left-rail-item" : "link"}>Log In (OIDC + PKCE)</Link>
+        </li>
+        <li>
           <Link to="/signup" className={activePage == "signup" ? "active-left-rail-item" : "link"}>Sign Up (Basic)</Link>
         </li>
         <li>
