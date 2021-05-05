@@ -1,0 +1,24 @@
+.splash-header {
+  text-align: center;
+  padding: 20px;
+  font-size: calc(10px + 3vmin);
+  color: black;
+}
+
+.splash-page {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.form {
+  padding: 20px;
+  flex-grow: 1;
+  display: inline;
+  text-align: center;
+  input[type="email"] { min-width: 300px; }
+  input[type="password"] { min-width: 300px; }
+}
+

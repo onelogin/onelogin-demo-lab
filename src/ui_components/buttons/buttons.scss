@@ -1,0 +1,17 @@
+.submit-button {
+  background-color: $onelogin-blue;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.cancel-button {
+  background-color: $onelogin-gray;
+  float: right;
+  border-radius: 5px;
+  color: $onelogin-black;
+  font-size: 15px;
+}

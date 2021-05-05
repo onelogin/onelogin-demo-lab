@@ -1,0 +1,23 @@
+.left-aligned-input-form {
+  color: #000; // section title text
+  text-align: left;
+  margin-right: 20px;
+}
+
+.input-form-field {
+  display: block;
+  margin: 10px 0px;
+}
+
+.centered-input-form {
+  text-align: center;
+}
+
+.onelogin-input {
+  color: $onelogin-black;
+  font-weight: bold;
+  min-width: 300px;
+  min-height: 25px;
+  background-color: $onelogin-gray;
+  border-radius: 5px;
+}
