@@ -6,6 +6,7 @@ import * as base64 from 'base64-js'
 import SubmitButton from '../../ui_components/buttons/submit_button';
 import AppWrapper from '../../ui_components/app_wrapper/app_wrapper'
 import Popup from '../../ui_components/popup/popup';
+import CryptoJS from 'crypto-js';
 
 class LoginPKCEPage extends Component {
 
@@ -95,15 +96,15 @@ const PKCEAuthCodeFirstStep = () => {
   let codeVerifier = createCodeVerifier( 50 );
   localStorage.setItem( 'code_verifier', codeVerifier );
 
-  return createCodeChallenge( codeVerifier ).then( codeChallenge => {
-    queryParams.push(`code_challenge=${codeChallenge}`);
-    queryParams.push(`redirect_uri=http://localhost/login_pkce`);
-    queryParams.push(`code_challenge_method=S256`);
-    queryParams.push(`response_type=code`);
-    queryParams.push(`scope=openid`);
+  const codeChallenge = createCodeChallenge( codeVerifier );
 
-    return `${oidcURL}?${queryParams.join("&")}`;
-  } );
+  queryParams.push(`code_challenge=${codeChallenge}`);
+  queryParams.push(`redirect_uri=http://localhost:3000/login_pkce`);
+  queryParams.push(`code_challenge_method=S256`);
+  queryParams.push(`response_type=code`);
+  queryParams.push(`scope=openid`);
+
+  return Promise.resolve(`${oidcURL}?${queryParams.join("&")}`);
 }
 
 const PKCEAuthCodeSecondStep = ( code ) => {
@@ -111,7 +112,7 @@ const PKCEAuthCodeSecondStep = ( code ) => {
 
   let params = qs.stringify( {
     grant_type: "authorization_code",
-    redirect_uri: "http://localhost/login_pkce",
+    redirect_uri: "http://localhost:3000/login_pkce",
     client_id: process.env.OIDC_CLIENT_ID,
     code_verifier: localStorage.getItem( 'code_verifier' ),
     code
@@ -157,30 +158,7 @@ const createCodeVerifier = ( size ) => {
 }
 
 const createCodeChallenge = ( codeVerifier ) => {
-  if ( typeof window !== 'undefined' && !!( window.crypto ) && !!( window.crypto.subtle ) ) {
-    return new Promise( ( resolve, reject ) => {
-      let codeVerifierCharCodes = textEncodeLite( codeVerifier );
-      crypto.subtle
-        .digest( 'SHA-256', codeVerifierCharCodes )
-        .then(
-          hashedCharCodes => resolve( urlSafe( new Uint8Array(hashedCharCodes) ) ),
-          error => reject( error )
-        );
-    });
-  }
-}
-
-const textEncodeLite = ( str ) => {
-  const charCodeBuffer = new Uint8Array( str.length );
-  for ( let i = 0; i < str.length; i++ ) {
-   charCodeBuffer[i] = str.charCodeAt( i );
-  }
-  return charCodeBuffer;
-}
-
-const urlSafe = ( buffer ) => {
-  const encoded = base64.fromByteArray( new Uint8Array( buffer ) );
-  return encoded.replace( /\+/g, '-' ).replace( /\//g, '_' ).replace( /=/g, '' );
+    return CryptoJS.enc.Base64url.stringify(CryptoJS.SHA256(codeVerifier));
 }
 
 export default LoginPKCEPage;
